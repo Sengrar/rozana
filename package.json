@@ -1,0 +1,50 @@
+{
+  "name": "rozana",
+  "version": "0.1.0",
+  "private": true,
+  "engines": {
+    "node": ">=20.9.0"
+  },
+  "scripts": {
+    "dev": "node node_modules/next/dist/bin/next dev",
+    "build": "node node_modules/next/dist/bin/next build",
+    "start": "node node_modules/next/dist/bin/next start",
+    "lint": "node node_modules/eslint/bin/eslint.js",
+    "typecheck": "node node_modules/next/dist/bin/next typegen && node node_modules/typescript/bin/tsc --noEmit",
+    "format": "node node_modules/prettier/bin/prettier.cjs --write .",
+    "format:check": "node node_modules/prettier/bin/prettier.cjs --check .",
+    "test": "node node_modules/vitest/vitest.mjs run",
+    "cf:login": "node scripts/cloudflare.mjs login",
+    "cf:whoami": "node scripts/cloudflare.mjs whoami",
+    "cf:build": "node scripts/cloudflare.mjs build",
+    "cf:preview": "node scripts/cloudflare.mjs preview",
+    "cf:deploy": "node scripts/cloudflare.mjs deploy",
+    "cf:rollback": "node scripts/cloudflare.mjs rollback"
+  },
+  "cloudflare": {
+    "rootDomain": ""
+  },
+  "dependencies": {
+    "@opennextjs/cloudflare": "1.20.16",
+    "@supabase/ssr": "0.12.7",
+    "@supabase/supabase-js": "2.119.0",
+    "next": "16.4.6",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "server-only": "0.0.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/turbopack": "4.3.5",
+    "@types/node": "^22.20.5",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^10.14.0",
+    "eslint-config-next": "16.4.6",
+    "prettier": "^3.9.10",
+    "prettier-plugin-tailwindcss": "^0.8.1",
+    "tailwindcss": "4.3.5",
+    "typescript": "^5",
+    "vitest": "^5.1.0",
+    "wrangler": "4.159.0"
+  }
+}

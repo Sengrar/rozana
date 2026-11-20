@@ -1,0 +1,17 @@
+# Paths starting with / are relative to the project root only.
+
+# Owner-written docs and agent instructions: never reformat
+/docs/
+/AGENTS.md
+/CLAUDE.md
+
+# Database migrations are reviewed by hand
+/supabase/
+
+# Installed or generated
+node_modules/
+/.next/
+/.open-next/
+/.wrangler/
+/package-lock.json
+/next-env.d.ts

@@ -1,0 +1,25 @@
+// Cloudflare Workers settings for the app. See docs/DEPLOY.md.
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "rozana",
+  "main": ".open-next/worker.js",
+  "compatibility_date": "2026-11-01",
+  "compatibility_flags": [
+    // Node.js APIs that Next.js needs
+    "nodejs_compat",
+    // fetch() may only reach public internet addresses
+    "global_fetch_strictly_public",
+  ],
+  "assets": {
+    "directory": ".open-next/assets",
+    "binding": "ASSETS",
+  },
+  "services": [
+    // Lets the app call itself; must match "name" above.
+    { "binding": "WORKER_SELF_REFERENCE", "service": "rozana" },
+  ],
+  "observability": { "enabled": true },
+  // No domain yet: the site runs on rozana.<your-subdomain>.workers.dev in
+  // one-address mode. When the domain is on Cloudflare, add "routes" here
+  // and set "rootDomain" in package.json (docs/DEPLOY.md, "Adding the domain").
+}

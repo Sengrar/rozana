@@ -1,0 +1,62 @@
+@import "tailwindcss";
+
+/*
+ * Design tokens. Screens use only these colour names, so per-tenant theming
+ * (M4) can change the look by overriding these variables and nothing else.
+ *
+ * The look follows a merchant's bill book: off-white paper, dark ink,
+ * pale-blue ruled lines, a red margin line, ink-blue for actions.
+ */
+:root {
+  --paper: #f6f2e8;
+  --sheet: #fffdf7;
+  --ink: #1d232b;
+  --ink-muted: #59626e;
+  --rule: #cfdbe6;
+  --rule-strong: #8ea5bc;
+  --margin: #b42318;
+  --action: #1f4e8c;
+  --action-ink: #ffffff;
+  --ok: #2f6b3a;
+  --font-body:
+    system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans",
+    "Noto Sans Devanagari", "Nirmala UI", "Kohinoor Devanagari", sans-serif;
+}
+
+/* Only the tokens below exist as colours. The default Tailwind palette is
+   switched off so screens cannot drift from the theme. */
+@theme {
+  --color-*: initial;
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-sheet: var(--sheet);
+  --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --color-rule: var(--rule);
+  --color-rule-strong: var(--rule-strong);
+  --color-margin: var(--margin);
+  --color-action: var(--action);
+  --color-action-ink: var(--action-ink);
+  --color-ok: var(--ok);
+  --font-sans: var(--font-body);
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  /* 17px: Devanagari vowel marks stay legible on small phones. */
+  font-size: 1.0625rem;
+  line-height: 1.6;
+}
+
+:focus-visible {
+  outline: 3px solid var(--action);
+  outline-offset: 2px;
+}
