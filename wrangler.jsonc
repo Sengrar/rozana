@@ -19,7 +19,10 @@
     { "binding": "WORKER_SELF_REFERENCE", "service": "rozana" },
   ],
   "observability": { "enabled": true },
-  // No domain yet: the site runs on rozana.<your-subdomain>.workers.dev in
+  // No domain yet: the site runs on https://rozana.rozana.workers.dev in
   // one-address mode. When the domain is on Cloudflare, add "routes" here
   // and set "rootDomain" in package.json (docs/DEPLOY.md, "Adding the domain").
+  "workers_dev": true,
+  // No public preview address for every uploaded version.
+  "preview_urls": false,
 }

@@ -17,7 +17,8 @@ after each step. Items marked "(suggested)" were proposed by Claude on
 - [ ] Super admin: list tenants, create tenant, assign plan, start 15-day trial
 - [x] Subdomain routing to the right tenant: main domain = our website,
       app.<domain> = the app, <shop>.<domain> = the shop's storefront (D28)
-- [ ] Deploy to Cloudflare
+- [x] Deploy to Cloudflare (live at https://rozana.rozana.workers.dev, one address
+      until the domain exists; docs/DEPLOY.md)
 
 ## M1 Core ordering loop
 - [ ] Shop-owner app at app.<domain> for owners, staff and delivery boys:

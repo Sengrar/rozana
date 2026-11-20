@@ -1,7 +1,7 @@
 # DEPLOY
 
 How the app goes live on Cloudflare Workers.
-Last checked 2026-11-10 with Next.js 16.4.6, @opennextjs/cloudflare 1.20.16
+Last deployed 2026-11-20 with Next.js 16.4.6, @opennextjs/cloudflare 1.20.16
 and wrangler 4.159.0. No secrets in this file, ever.
 
 ## What runs where
@@ -13,9 +13,9 @@ and wrangler 4.159.0. No secrets in this file, ever.
   project as development.
 - No page cache: every page is rendered on request (`open-next.config.ts`).
 
-## Now: one address on workers.dev (no domain yet)
-The site runs at `https://rozana.<your-subdomain>.workers.dev`, everything on
-one address:
+## Live now: one address on workers.dev (no domain yet)
+Live since 2026-11-20: **https://rozana.rozana.workers.dev** (Worker `rozana`
+on the account's workers.dev subdomain `rozana`). Everything is on one address:
 - `/` our website
 - `/login`, `/account`, `/admin` the app
 - `/shop/<shop>` a shop's storefront
@@ -26,9 +26,8 @@ When the domain is ready, see "Adding the domain" below.
 ## One-time setup (owner)
 1. Cloudflare account: sign up free at https://dash.cloudflare.com/sign-up,
    or use the one you have.
-2. workers.dev address: in the Cloudflare dashboard, open Workers & Pages once.
-   If it asks you to choose a workers.dev subdomain, pick one (for example your
-   brand name). The site's address becomes `rozana.<that>.workers.dev`.
+2. workers.dev address: the first `npm run cf:deploy` asks to register a
+   workers.dev subdomain; answer Y and type a name. Done on 2026-11-20: `rozana`.
 3. Log this computer in. In the project folder run `npm run cf:login`. The
    browser opens; log in and click Allow. Check with `npm run cf:whoami`.
 
@@ -42,6 +41,17 @@ When the domain is ready, see "Adding the domain" below.
 
 To undo a bad deploy: `npm run cf:rollback` and pick the previous version
 (or Cloudflare dashboard > Workers & Pages > rozana > Deployments).
+
+### If the deploy fails
+- "Unable to resolve Cloudflare's API hostname" or "fetch failed": the internet
+  connection dropped. Run `npm run cf:deploy` again; files already uploaded are
+  skipped.
+- "Authentication error [code: 10000]" after a long upload: the Cloudflare login
+  (it lasts about an hour) ran out while the upload was still going. On a slow
+  connection the upload takes over two minutes. Run `npm run cf:deploy` again;
+  wrangler renews the login first. This happened on 2026-11-20.
+- Asked to register a workers.dev subdomain: run the deploy in a terminal where
+  you can type the answer (see One-time setup).
 
 ### What `cf:deploy` does (`scripts/cloudflare.mjs`)
 1. Refuses to build if `.env`, `.env.local` or any other `.env.*` file the build

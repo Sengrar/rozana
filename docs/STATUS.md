@@ -45,7 +45,14 @@ Last updated: 2026-11-20
   neither can rename or join the other shop; and that a logged-out visitor sees
   nothing. 11 of 11 passed twice on 2026-11-10 against the dev project; test
   data is deleted afterwards (checked: 0 left).
-- M0 step 6 of 6 (ready; live deploy waits for the owner's Cloudflare login):
+- M0 step 6 of 6: LIVE since 2026-11-20 at https://rozana.rozana.workers.dev
+  (one address until the domain exists; Cloudflare account's workers.dev
+  subdomain is "rozana"; version ff962a73). Checked live: home, login,
+  protected pages redirect to login, unknown shop and page 404, a temporary
+  real shop at /shop/<shop> (then deleted), icon, static-file caching, dev
+  panel hidden; login page 5 times in a row with no Error 1102. First upload
+  failed twice (internet dropped; then the hour-long Cloudflare login ran out
+  during a 2-minute upload); both fixes are in docs/DEPLOY.md. Built with:
   Cloudflare adapter (@opennextjs/cloudflare 1.20.16) and wrangler 4.159.0;
   wrangler.jsonc, open-next.config.ts (no page cache), public/_headers,
   scripts/cloudflare.mjs (npm run cf:login / cf:preview / cf:deploy /
@@ -56,7 +63,7 @@ Last updated: 2026-11-20
   - Built natively on Windows (the adapter warns Windows is not fully
     supported). Ran the build locally in Cloudflare's runtime: all pages,
     redirects, a real shop at /shop/<shop>, 404s and asset caching correct;
-    no runtime errors; upload 1.4 MB compressed. Live site not deployed yet.
+    no runtime errors; upload 1.4 MB compressed.
 - Code on GitHub (2026-11-20): https://github.com/Sengrar/rozana, PUBLIC for
   now, branch main. Initial commit checked before pushing: no Supabase URL,
   publishable key or secret key in any committed file; .env.local and
@@ -71,21 +78,23 @@ Last updated: 2026-11-20
   .env files: all passed.
 
 ## In progress
-- M0 step 6: owner logs in to Cloudflare (npm run cf:login), then deploy.
+- M0 is built end to end. Waiting for the owner's click-through (steps 3 and 4
+  locally, and login on the live site) to call M0 done.
 
 ## Next
-- After deploy: owner clicks through M0 (steps 3, 4 and the live site).
-- Then M1 (shop-owner app, installable app, customer WhatsApp-link login, ...).
+- M1, starting with the shop-owner app at app.<domain> and the installable app
+  (docs/ROADMAP.md). Needs the pilot bakery facts (docs/PILOT.md).
 
 ## Blockers / open questions for the owner
+- Log in on the live site (https://rozana.rozana.workers.dev/login) with the
+  super admin account and open /admin. Logins there are separate from
+  localhost. The live site uses the development Supabase project for now.
 - Friend's access: their GitHub username (for a write-access invite to the
   repo) and a Supabase organisation invite (CONTRIBUTING.md, "Access").
 - The repository is public, so docs/ (pricing, go-to-market, research,
   decisions) is readable by anyone. Make it private before it matters:
   `gh repo edit Sengrar/rozana --visibility private --accept-visibility-change-consequences`.
 - Optional: protect main on GitHub (pull request + green CI required).
-- Cloudflare: account, workers.dev subdomain, and `npm run cf:login` on this
-  computer (docs/DEPLOY.md, "One-time setup").
 - Run supabase/migrations/0002_admin_members.sql in Supabase's SQL Editor (needed
   for the People section on a shop page).
 - Log in again at http://app.localhost:3000/login: logins are per address, so the
@@ -94,8 +103,9 @@ Last updated: 2026-11-20
   remove the second one if needed, then confirm a non-admin lands on "My account".
 - Open http://<your-shop>.localhost:3000 for a shop you created, to see its
   storefront placeholder.
-- Before step 6: a domain on Cloudflare is needed for shop subdomains, and the
-  Workers Paid plan ($5/month) is likely needed (free plan: 10 ms CPU per request).
+- A domain on Cloudflare is needed for shop subdomains (docs/DEPLOY.md, "Adding
+  the domain"). Workers Paid ($5/month) only if the live site starts showing
+  Error 1102 (free plan: 10 ms CPU per request; not seen so far).
 - Website add-on prices and the open points in D30 (domain renewal, what happens
   when a subscription lapses).
 - The Supabase CLI is not set up yet; step 5 or 6 will need it for migrations
@@ -108,6 +118,8 @@ Last updated: 2026-11-20
 - Other PROPOSED items in docs/DECISIONS.md (D19-D26) need a yes or no.
 
 ## Session log (newest first)
+- 2026-11-20: M0 step 6 done: deployed to https://rozana.rozana.workers.dev and
+  checked live. wrangler.jsonc now sets workers_dev on and preview_urls off.
 - 2026-11-20: Project put under git and pushed to a new public repo
   (Sengrar/rozana) with a contributor guide, PR template and CI, for a second
   developer joining.
