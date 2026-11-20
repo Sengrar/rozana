@@ -1,6 +1,6 @@
 # STATUS
 
-Last updated: 2026-11-10
+Last updated: 2026-11-20
 
 ## Done
 - Research, pricing, go-to-market proposals (docs/)
@@ -57,6 +57,18 @@ Last updated: 2026-11-10
     supported). Ran the build locally in Cloudflare's runtime: all pages,
     redirects, a real shop at /shop/<shop>, 404s and asset caching correct;
     no runtime errors; upload 1.4 MB compressed. Live site not deployed yet.
+- Code on GitHub (2026-11-20): https://github.com/Sengrar/rozana, PUBLIC for
+  now, branch main. Initial commit checked before pushing: no Supabase URL,
+  publishable key or secret key in any committed file; .env.local and
+  .env.secrets are ignored; commits use the owner's GitHub no-reply email.
+- Second developer setup: CONTRIBUTING.md (access, setup, branch + pull
+  request workflow, rules), .github/pull_request_template.md, CI in
+  .github/workflows/ci.yml (install, lint, typecheck, format check,
+  Cloudflare build on every pull request and push to main; not npm test,
+  which needs the secret key), .gitattributes (LF line endings everywhere),
+  .node-version (24). AGENTS.md rule 4 corrected for D32 and rule 5 added
+  (branches and pull requests). CI steps rehearsed on a fresh clone without
+  .env files: all passed.
 
 ## In progress
 - M0 step 6: owner logs in to Cloudflare (npm run cf:login), then deploy.
@@ -66,6 +78,12 @@ Last updated: 2026-11-10
 - Then M1 (shop-owner app, installable app, customer WhatsApp-link login, ...).
 
 ## Blockers / open questions for the owner
+- Friend's access: their GitHub username (for a write-access invite to the
+  repo) and a Supabase organisation invite (CONTRIBUTING.md, "Access").
+- The repository is public, so docs/ (pricing, go-to-market, research,
+  decisions) is readable by anyone. Make it private before it matters:
+  `gh repo edit Sengrar/rozana --visibility private --accept-visibility-change-consequences`.
+- Optional: protect main on GitHub (pull request + green CI required).
 - Cloudflare: account, workers.dev subdomain, and `npm run cf:login` on this
   computer (docs/DEPLOY.md, "One-time setup").
 - Run supabase/migrations/0002_admin_members.sql in Supabase's SQL Editor (needed
@@ -90,6 +108,9 @@ Last updated: 2026-11-10
 - Other PROPOSED items in docs/DECISIONS.md (D19-D26) need a yes or no.
 
 ## Session log (newest first)
+- 2026-11-20: Project put under git and pushed to a new public repo
+  (Sengrar/rozana) with a contributor guide, PR template and CI, for a second
+  developer joining.
 - 2026-11-10: M0 step 6 prepared: Cloudflare build works and was tested
   locally; secret key moved to .env.secrets; docs/DEPLOY.md written (D31, D32).
   Waiting for the owner's Cloudflare login to go live.
